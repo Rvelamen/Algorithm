@@ -1,0 +1,12 @@
+# -*- coding:utf-8 -*-
+"""
+TODO
+    leetcode 面试题 02.07.
+
+"""
+import json
+x = """
+## 解题思路：\n\n设「第一个公共节点」为 `node` ，「链表 `headA`」的节点数量为 $a$ ，「链表 `headB`」的节点数量为 $b$ ，「两链表的公共尾部」的节点数量为 $c$ ，则有：\n\n- 头节点 `headA`  到 `node` 前，共有 $a - c$ 个节点；\n- 头节点 `headB`  到 `node` 前，共有 $b - c$ 个节点；\n\n![Picture1.png](https://pic.leetcode-cn.com/1615224578-EBRtwv-Picture1.png){:width=500}\n\n考虑构建两个节点指针 `A​` , `B` 分别指向两链表头节点 `headA` , `headB` ，做如下操作：\n\n- 指针 `A` 先遍历完链表 `headA` ，再开始遍历链表 `headB` ，当走到 `node` 时，共走步数为：\n\n$$\na + (b - c)\n$$\n\n- 指针 `B` 先遍历完链表 `headB` ，再开始遍历链表 `headA` ，当走到 `node` 时，共走步数为：\n\n$$\nb + (a - c)\n$$\n\n如下式所示，此时指针 `A` , `B` 重合，并有两种情况：\n\n$$\na + (b - c) = b + (a - c)\n$$\n\n1. 若两链表 **有** 公共尾部 (即 $c > 0$ ) ：指针 `A` , `B` 同时指向「第一个公共节点」`node` 。\n2. 若两链表 **无** 公共尾部 (即 $c = 0$ ) ：指针 `A` , `B` 同时指向 $null$ 。\n\n因此返回 `A` 即可。\n\n> 如下图所示，为 $a = 5$ , $b = 3$ , $c = 2$ 示例的算法执行过程。\n\n<![Picture2.png](https://pic.leetcode-cn.com/1615224578-lFxRVR-Picture2.png),![Picture3.png](https://pic.leetcode-cn.com/1615224578-atzfoi-Picture3.png),![Picture4.png](https://pic.leetcode-cn.com/1615224578-QvNyxe-Picture4.png),![Picture5.png](https://pic.leetcode-cn.com/1615224578-zPMkyB-Picture5.png),![Picture6.png](https://pic.leetcode-cn.com/1615224578-MRfzKN-Picture6.png),![Picture7.png](https://pic.leetcode-cn.com/1615224578-UIHyvx-Picture7.png),![Picture8.png](https://pic.leetcode-cn.com/1615224578-fyOdzW-Picture8.png),![Picture9.png](https://pic.leetcode-cn.com/1615224578-LcVJxI-Picture9.png)>\n\n### 复杂度分析：\n\n- **时间复杂度 $O(a + b)$ ：** 最差情况下（即 $|a - b| = 1$ , $c = 0$ ），此时需遍历 $a + b$ 个节点。\n- **空间复杂度 $O(1)$ ：** 节点指针 `A` , `B` 使用常数大小的额外空间。\n\n## 代码：\n\n```Python []\nclass Solution:\n    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:\n        A, B = headA, headB\n        while A != B:\n            A = A.next if A else headB\n            B = B.next if B else headA\n        return A\n```\n\n```Java []\npublic class Solution {\n    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {\n        ListNode A = headA, B = headB;\n        while (A != B) {\n            A = A != null ? A.next : headB;\n            B = B != null ? B.next : headA;\n        }\n        return A;\n    }\n}\n```\n\n```C++ []\nclass Solution {\npublic:\n    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {\n        ListNode *A = headA, *B = headB;\n        while (A != B) {\n            A = A != nullptr ? A->next : headB;\n            B = B != nullptr ? B->next : headA;\n        }\n        return A;\n    }\n};\n```\n
+"""
+
+print(x)
